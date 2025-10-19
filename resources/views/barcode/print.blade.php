@@ -44,8 +44,8 @@
         .barcode-label {
             width: 33mm; /* 3.3cm */
             height: 21mm; /* 2.1cm */
-            border: 1px solid #000;
-            padding: 1mm;
+            border: none; /* No border */
+            padding: 2mm; /* Padding around content */
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -157,7 +157,7 @@
             }
 
             .barcode-label {
-                border: 1px solid #000;
+                border: none;
             }
 
             @page {
