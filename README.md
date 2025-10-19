@@ -1,61 +1,267 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 🏷️ LAPTOP EXPERT Barcode Printing System
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+A professional, full-featured barcode printing system built with Laravel for retail/shop environments. Designed specifically for thermal roll printers (10.7cm width) with support for bulk continuous printing.
 
-## About Laravel
+![Laravel](https://img.shields.io/badge/Laravel-12.x-red)
+![PHP](https://img.shields.io/badge/PHP-8.1%2B-blue)
+![MySQL](https://img.shields.io/badge/MySQL-5.7%2B-orange)
+![License](https://img.shields.io/badge/license-MIT-green)
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## ✨ Key Features
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### 🔐 User Authentication
+- Secure login system with email/password
+- Multi-user support for staff accounts
+- Session management with "Remember me"
+- User tracking for all operations
+- Easy user creation via command line
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### 🏷️ Barcode Generation
+- CODE-128 barcode format
+- Auto-suggest product search
+- Multiple product selection
+- Bulk printing: 50-300 copies per product
+- Full product name display (up to 3 lines)
+- Real-time barcode preview
 
-## Learning Laravel
+### 📊 Print Logging & Reports
+- Automatic logging of all prints
+- Track who printed what and when
+- Advanced filtering (date range, product code)
+- Statistics dashboard (total prints, today's prints)
+- CSV export for analysis
+- Complete audit trail
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### 🖨️ Thermal Printer Support
+- Optimized for 10.7cm (107mm) thermal roll printers
+- Precise layout: 3 barcodes per row
+- Exact sizing: 3.3cm × 2.1cm per barcode
+- 2mm spacing between barcodes
+- 3mm gap between rows
+- Continuous roll printing
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+### 🎨 Professional UI/UX
+- Dark theme interface
+- Clean, modern design
+- Responsive layout
+- Real-time search suggestions
+- Intuitive navigation
+- Print preview
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## 🚀 Quick Start
 
-## Laravel Sponsors
+### Prerequisites
+- PHP 8.1 or higher
+- MySQL 5.7 or higher
+- Composer
+- XAMPP (recommended) or similar local server
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+### Installation
 
-### Premium Partners
+1. **Clone the repository**
+```bash
+git clone https://github.com/dhanushka-94/lpxtbarcodesys.git
+cd lpxtbarcodesys
+```
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+2. **Install dependencies**
+```bash
+composer install
+```
 
-## Contributing
+3. **Configure environment**
+```bash
+cp .env.example .env
+php artisan key:generate
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+4. **Update `.env` file**
+```env
+APP_NAME="LAPTOP EXPERT Barcode Printing System"
 
-## Code of Conduct
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=lpxtbarcode
+DB_USERNAME=root
+DB_PASSWORD=
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+# Products Database (Read-Only)
+PRODUCTS_DB_HOST=127.0.0.1
+PRODUCTS_DB_PORT=3306
+PRODUCTS_DB_DATABASE=your_products_database
+PRODUCTS_DB_USERNAME=root
+PRODUCTS_DB_PASSWORD=
+```
 
-## Security Vulnerabilities
+5. **Create databases**
+```sql
+CREATE DATABASE lpxtbarcode;
+-- Your products database should already exist
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+6. **Run migrations**
+```bash
+php artisan migrate
+```
 
-## License
+7. **Create admin user**
+```bash
+php artisan db:seed --class=AdminUserSeeder
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+8. **Start the server**
+```bash
+php artisan serve
+```
+
+9. **Access the system**
+- URL: http://localhost:8000
+- Email: admin@msk.com
+- Password: password
+
+## 📖 Documentation
+
+### Complete Guides
+- **[BARCODE_SYSTEM.md](BARCODE_SYSTEM.md)** - Complete system documentation
+- **[AUTHENTICATION.md](AUTHENTICATION.md)** - Authentication & user management
+- **[LOGIN_SETUP.md](LOGIN_SETUP.md)** - Quick setup guide
+- **[NEW_FEATURES.md](NEW_FEATURES.md)** - All features overview
+
+### Database Structure
+
+**Main Database:** `lpxtbarcode`
+- `users` - User accounts
+- `barcode_print_logs` - Print history
+- `cache`, `sessions`, `jobs` - Laravel system tables
+
+**Products Database:** Your existing products database
+- Should contain `products` table with: code, name, price, quantity
+
+## 🎯 Usage
+
+### Daily Workflow
+1. **Login** with your credentials
+2. **Search** for products using code or name
+3. **Select** products to print
+4. **Set copies** (50-300 per product)
+5. **Generate** barcodes
+6. **Print** to thermal printer
+7. System automatically logs with your name
+
+### Creating Users
+```bash
+php artisan user:create
+```
+
+### Viewing Reports
+- Go to "Print Reports" in navigation
+- Filter by date or product
+- Export to CSV
+
+### Print Settings
+- **Paper:** 10.7cm thermal roll
+- **Layout:** 3 barcodes per row
+- **Size:** 3.3cm × 2.1cm each
+- **Format:** Continuous roll
+
+## 🛠️ Tech Stack
+
+- **Backend:** Laravel 12.x
+- **Database:** MySQL with dual database support
+- **Barcode:** picqer/php-barcode-generator (CODE-128)
+- **Authentication:** Laravel built-in Auth
+- **Frontend:** Blade templates with inline CSS/JS
+- **No Build Process:** No Vite/Mix required
+
+## 📂 Project Structure
+
+```
+lpxtbarcodesys/
+├── app/
+│   ├── Console/Commands/
+│   │   └── CreateUser.php              # User creation command
+│   ├── Http/Controllers/
+│   │   ├── AuthController.php          # Login/logout
+│   │   └── BarcodeController.php       # Main barcode logic
+│   └── Models/
+│       ├── Product.php                 # Products model
+│       ├── BarcodePrintLog.php         # Logging model
+│       └── User.php                    # User model
+├── resources/views/
+│   ├── layouts/
+│   │   └── app.blade.php               # Main layout
+│   ├── auth/
+│   │   └── login.blade.php             # Login page
+│   └── barcode/
+│       ├── index.blade.php             # Search & select
+│       ├── print.blade.php             # Print layout
+│       └── reports.blade.php           # Reports dashboard
+├── database/
+│   ├── migrations/                     # Database migrations
+│   └── seeders/
+│       └── AdminUserSeeder.php         # Default admin
+└── routes/
+    └── web.php                         # Application routes
+```
+
+## 🔧 Configuration
+
+### Barcode Settings
+Edit `app/Http/Controllers/BarcodeController.php`:
+- Barcode type: `TYPE_CODE_128`
+- Width multiplier: `3`
+- Height: `50` pixels
+
+### Copy Limits
+Edit `resources/views/barcode/index.blade.php` and `BarcodeController.php`:
+- Minimum: `50`
+- Maximum: `300`
+
+### Paper Size
+Edit `resources/views/barcode/print.blade.php`:
+- Width: `107mm`
+- Height: `auto` (continuous)
+
+## 🤝 Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## 📝 License
+
+This project is open-sourced software licensed under the [MIT license](LICENSE).
+
+## 👨‍💻 Author
+
+**Dhanushka**
+- GitHub: [@dhanushka-94](https://github.com/dhanushka-94)
+
+## 🙏 Acknowledgments
+
+- Built for LAPTOP EXPERT retail operations
+- Designed for MSK Computers product database integration
+- Optimized for thermal roll printer environments
+
+## 📞 Support
+
+For issues or questions:
+1. Check the documentation files
+2. Open an issue on GitHub
+3. Review the code comments
+
+## 🚀 Deployment
+
+### Production Checklist
+- [ ] Change default admin password
+- [ ] Update `.env` with production database credentials
+- [ ] Set `APP_ENV=production`
+- [ ] Set `APP_DEBUG=false`
+- [ ] Configure proper session driver
+- [ ] Set up SSL certificate
+- [ ] Configure backup system
+- [ ] Set up proper logging
+- [ ] Test thermal printer connection
+
+---
+
+**Built with ❤️ for efficient retail barcode management**
