@@ -29,7 +29,7 @@ class BarcodeController extends Controller
     public function generate(Request $request)
     {
         $productIds = $request->input('products', []);
-        $copies = max(50, min(300, (int)$request->input('copies', 50)));
+        $copies = max(1, min(300, (int)$request->input('copies', 1)));
         
         if (empty($productIds)) {
             return redirect()->back()->with('error', 'Please select at least one product');

@@ -33,8 +33,8 @@
             @csrf
             
             <div style="margin-bottom: 20px; padding: 15px; background: #2a2a2a; border-radius: 6px; border: 1px solid #3a3a3a;">
-                <label for="copies" style="margin-bottom: 8px; display: block;">Number of copies per product (50-300):</label>
-                <input type="number" name="copies" id="copies" value="50" min="50" max="300" 
+                <label for="copies" style="margin-bottom: 8px; display: block;">Number of copies per product (1-300):</label>
+                <input type="number" name="copies" id="copies" value="1" min="1" max="300" 
                     style="width: 120px; padding: 8px 12px; background: #1e1e1e; border: 1px solid #3a3a3a; border-radius: 6px; color: #e0e0e0;">
             </div>
             
