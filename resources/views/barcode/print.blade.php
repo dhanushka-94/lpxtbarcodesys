@@ -37,6 +37,8 @@
             display: flex;
             width: 107mm;
             margin-bottom: 3mm; /* Space between rows */
+            page-break-inside: avoid;
+            break-inside: avoid;
         }
 
         .barcode-spacer {
@@ -54,6 +56,7 @@
             align-items: center;
             justify-content: space-between;
             page-break-inside: avoid;
+            break-inside: avoid;
             background: #ffffff;
             flex-shrink: 0;
             position: relative;
@@ -152,33 +155,47 @@
         }
 
         @media print {
+            * {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
             body {
                 background: #ffffff;
-                padding: 0;
-                margin: 0;
+                padding: 0 !important;
+                margin: 0 !important;
                 display: block;
+                width: 107mm;
             }
 
             .barcode-container {
-                width: 107mm;
-                margin: 0;
+                width: 107mm !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                background: #ffffff;
+                box-shadow: none;
             }
 
             .controls {
-                display: none;
+                display: none !important;
             }
 
             .barcode-row {
                 margin-bottom: 3mm;
+                page-break-inside: avoid;
+                break-inside: avoid;
             }
 
             .barcode-label {
                 border: none;
+                page-break-inside: avoid;
+                break-inside: avoid;
             }
 
             @page {
                 size: 107mm auto; /* Continuous roll: 10.7cm width, auto height */
                 margin: 0;
+                padding: 0;
             }
         }
     </style>
@@ -218,6 +235,13 @@
     </div>
 
     <div class="controls">
+        <div style="background: #fff; padding: 12px 16px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.15); margin-right: 12px; font-size: 12px; color: #666; max-width: 200px;">
+            <strong>Print Tips:</strong><br>
+            • Set paper size to Custom: 107mm<br>
+            • Set margins to None/Minimal<br>
+            • Disable headers/footers<br>
+            • Scale: 100%
+        </div>
         <button onclick="window.print()" class="btn btn-primary">Print</button>
         <button onclick="window.location.href='{{ route('barcode.index') }}'" class="btn btn-secondary">Back</button>
     </div>
