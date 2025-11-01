@@ -25,12 +25,14 @@
 
         .barcode-container {
             display: flex;
-            flex-wrap: wrap;
+            flex-direction: column;
             width: 107mm;
             padding: 0;
             margin: 0;
             background: #ffffff;
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            height: auto;
+            min-height: auto;
         }
 
         .barcode-row {
@@ -160,20 +162,27 @@
                 print-color-adjust: exact;
             }
 
-            body {
-                background: #ffffff;
+            html, body {
+                background: #ffffff !important;
                 padding: 0 !important;
                 margin: 0 !important;
-                display: block;
-                width: 107mm;
+                display: block !important;
+                width: 107mm !important;
+                height: auto !important;
+                overflow: visible !important;
             }
 
             .barcode-container {
                 width: 107mm !important;
                 margin: 0 !important;
                 padding: 0 !important;
-                background: #ffffff;
-                box-shadow: none;
+                background: #ffffff !important;
+                box-shadow: none !important;
+                height: auto !important;
+                min-height: auto !important;
+                max-height: none !important;
+                overflow: visible !important;
+                page-break-after: auto !important;
             }
 
             .controls {
@@ -181,21 +190,25 @@
             }
 
             .barcode-row {
-                margin-bottom: 3mm;
-                page-break-inside: avoid;
-                break-inside: avoid;
+                margin-bottom: 3mm !important;
+                page-break-inside: avoid !important;
+                break-inside: avoid !important;
+                page-break-after: auto !important;
+                display: flex !important;
+                width: 107mm !important;
             }
 
             .barcode-label {
-                border: none;
-                page-break-inside: avoid;
-                break-inside: avoid;
+                border: none !important;
+                page-break-inside: avoid !important;
+                break-inside: avoid !important;
+                height: 21mm !important;
             }
 
             @page {
                 size: 107mm auto; /* Continuous roll: 10.7cm width, auto height */
-                margin: 0;
-                padding: 0;
+                margin: 0 !important;
+                padding: 0 !important;
             }
         }
     </style>
@@ -235,12 +248,14 @@
     </div>
 
     <div class="controls">
-        <div style="background: #fff; padding: 12px 16px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.15); margin-right: 12px; font-size: 12px; color: #666; max-width: 200px;">
-            <strong>Print Tips:</strong><br>
-            • Set paper size to Custom: 107mm<br>
-            • Set margins to None/Minimal<br>
-            • Disable headers/footers<br>
-            • Scale: 100%
+        <div style="background: #fff; padding: 12px 16px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.15); margin-right: 12px; font-size: 12px; color: #666; max-width: 220px;">
+            <strong>⚠️ Print All Labels:</strong><br>
+            • <strong>Paper Size:</strong> Custom 107mm<br>
+            • <strong>More Settings:</strong> Uncheck "Simplify page"<br>
+            • <strong>Scale:</strong> 100% (NOT "Fit to page")<br>
+            • <strong>Margins:</strong> None<br>
+            • <strong>Headers/Footers:</strong> Off<br>
+            • <strong>Background:</strong> On (if needed)
         </div>
         <button onclick="window.print()" class="btn btn-primary">Print</button>
         <button onclick="window.location.href='{{ route('barcode.index') }}'" class="btn btn-secondary">Back</button>
