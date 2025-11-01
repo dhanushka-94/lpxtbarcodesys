@@ -63,10 +63,10 @@
             width: 100%;
             overflow: hidden;
             display: -webkit-box;
-            -webkit-line-clamp: 3;
+            -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
             line-height: 1.1;
-            height: 6mm;
+            height: 4mm;
             word-wrap: break-word;
         }
 
