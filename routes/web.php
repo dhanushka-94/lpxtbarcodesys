@@ -12,6 +12,7 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 // Protected Routes (require authentication)
 Route::middleware('auth')->group(function () {
     Route::get('/', [BarcodeController::class, 'index'])->name('barcode.index');
+    Route::get('/stats', [BarcodeController::class, 'getStats'])->name('barcode.stats');
     Route::get('/search', [BarcodeController::class, 'search'])->name('barcode.search');
     Route::post('/generate', [BarcodeController::class, 'generate'])->name('barcode.generate');
     Route::get('/barcode/{code}', [BarcodeController::class, 'generateBarcode'])->name('barcode.image');

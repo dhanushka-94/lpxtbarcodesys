@@ -14,6 +14,17 @@ class BarcodeController extends Controller
         return view('barcode.index');
     }
 
+    public function getStats()
+    {
+        $totalProducts = Product::count();
+        $todayPrints = BarcodePrintLog::whereDate('printed_at', today())->sum('copies_printed');
+        
+        return response()->json([
+            'total_products' => $totalProducts,
+            'today_prints' => $todayPrints,
+        ]);
+    }
+
     public function search(Request $request)
     {
         $query = $request->get('query');
