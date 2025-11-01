@@ -77,7 +77,7 @@
         }
 
         .barcode-spacer {
-            width: 2mm;
+            width: 3mm;
             flex-shrink: 0;
             position: relative;
             border-left: 1px dashed #e0e0e0;
@@ -88,7 +88,7 @@
         }
 
         .barcode-label {
-            width: 33mm;
+            width: 31.67mm;
             height: 21mm;
             border: 1px solid #ccc;
             padding: 1.5mm 2mm;
@@ -106,7 +106,7 @@
         }
 
         .barcode-label::before {
-            content: '33mm';
+            content: '31.67mm';
             position: absolute;
             top: -12px;
             left: 50%;
@@ -320,11 +320,11 @@
         @foreach($chunks as $rowIndex => $chunk)
             <div class="barcode-row">
                 <div class="measurement-label left-label" style="display: {{ $rowIndex === 0 ? 'block' : 'none' }};">
-                    2mm Margin
+                    3mm Margin
                 </div>
                 
                 <div class="barcode-spacer">
-                    <span class="measurement-label" style="top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 6px;">2mm</span>
+                    <span class="measurement-label" style="top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 6px;">3mm</span>
                 </div>
                 
                 @foreach($chunk as $index => $product)
@@ -336,7 +336,7 @@
                     </div>
                     
                     <div class="barcode-spacer">
-                        <span class="measurement-label" style="top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 6px;">2mm</span>
+                        <span class="measurement-label" style="top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 6px;">3mm</span>
                     </div>
                 @endforeach
                 
@@ -345,9 +345,9 @@
                 @endphp
                 
                 @for($i = 0; $i < $remaining; $i++)
-                    <div style="width: 33mm; height: 21mm; border: 1px dashed #ddd; box-sizing: border-box;"></div>
+                    <div style="width: 31.67mm; height: 21mm; border: 1px dashed #ddd; box-sizing: border-box;"></div>
                     <div class="barcode-spacer">
-                        <span class="measurement-label" style="top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 6px;">2mm</span>
+                        <span class="measurement-label" style="top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 6px;">3mm</span>
                     </div>
                 @endfor
                 
