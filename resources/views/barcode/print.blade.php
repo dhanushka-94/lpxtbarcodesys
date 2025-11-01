@@ -96,7 +96,7 @@
             width: 33mm;
             height: 21mm;
             border: 1px solid #ccc;
-            padding: 1.5mm 2mm;
+            padding: 1.5mm 2.5mm;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -168,12 +168,15 @@
         }
 
         .barcode-image {
-            width: 100%;
+            width: calc(100% - 1mm);
+            max-width: calc(100% - 1mm);
             height: auto;
             max-height: 9mm;
             object-fit: contain;
             image-rendering: crisp-edges;
             margin: 0.5mm 0;
+            padding: 0 0.5mm;
+            box-sizing: border-box;
         }
 
         .product-code {
