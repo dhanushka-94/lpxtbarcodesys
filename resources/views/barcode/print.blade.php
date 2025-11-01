@@ -21,6 +21,9 @@
             align-items: flex-start;
             min-height: 100vh;
             padding: 30px 50px;
+            zoom: 1.5;
+            transform: scale(1.5);
+            transform-origin: top center;
         }
 
         .barcode-container {
@@ -106,7 +109,7 @@
             background: #ffffff;
             flex-shrink: 0;
             position: relative;
-            margin: 1mm;
+            margin: 0;
             box-sizing: border-box;
         }
 
@@ -247,6 +250,8 @@
                 width: 112mm !important;
                 height: auto !important;
                 overflow: visible !important;
+                zoom: 1 !important;
+                transform: scale(1) !important;
             }
 
             .barcode-container {
