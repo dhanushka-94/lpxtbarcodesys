@@ -20,37 +20,35 @@
             justify-content: center;
             align-items: flex-start;
             min-height: 100vh;
-            padding: 30px 50px;
-            zoom: 1.5;
-            transform: scale(1.5);
-            transform-origin: top center;
+            padding: 40px 60px;
         }
 
         .barcode-container {
             display: flex;
             flex-direction: column;
             width: 112mm;
-            padding: 0;
+            padding: 15px;
             margin: 0;
             background: #ffffff;
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
             height: auto;
             min-height: auto;
             position: relative;
-            border-left: 1px dashed #ccc;
-            border-right: 1px dashed #ccc;
+            border-left: 2px dashed #999;
+            border-right: 2px dashed #999;
         }
 
         .measurement-label {
             position: absolute;
-            font-size: 8px;
+            font-size: 11px;
             color: #999;
-            background: rgba(255, 255, 255, 0.8);
-            padding: 1px 3px;
-            border-radius: 2px;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 2px 5px;
+            border-radius: 3px;
             font-family: monospace;
             z-index: 10;
             pointer-events: none;
+            font-weight: 600;
         }
 
         .top-label {
@@ -116,33 +114,35 @@
         .barcode-label::before {
             content: '33mm';
             position: absolute;
-            top: -12px;
+            top: -16px;
             left: 50%;
             transform: translateX(-50%);
-            font-size: 7px;
+            font-size: 10px;
             color: #666;
             background: #fff;
-            padding: 0 2px;
+            padding: 2px 4px;
             font-family: monospace;
             white-space: nowrap;
+            font-weight: 600;
         }
 
         .barcode-label::after {
             content: '21mm';
             position: absolute;
-            left: -20px;
+            left: -28px;
             top: 50%;
             transform: translateY(-50%) rotate(-90deg);
-            font-size: 7px;
+            font-size: 10px;
             color: #666;
             background: #fff;
-            padding: 0 2px;
+            padding: 2px 4px;
             font-family: monospace;
             white-space: nowrap;
+            font-weight: 600;
         }
 
         .product-name {
-            font-size: 6.5pt;
+            font-size: 10pt;
             font-weight: 400;
             text-align: center;
             color: #1a1a1a;
@@ -151,43 +151,43 @@
             display: -webkit-box;
             -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
-            line-height: 1.25;
+            line-height: 1.35;
             word-wrap: break-word;
-            letter-spacing: 0.01em;
-            margin-bottom: 0.5mm;
-            min-height: 5mm;
-            padding: 0.2mm 0;
+            letter-spacing: 0.02em;
+            margin-bottom: 1mm;
+            min-height: 7mm;
+            padding: 0.5mm 0;
             box-sizing: border-box;
         }
 
         .product-price {
-            font-size: 8.5pt;
+            font-size: 12pt;
             font-weight: 700;
             text-align: center;
             color: #000;
             letter-spacing: 0.05em;
-            margin: 0.3mm 0;
-            line-height: 1.2;
+            margin: 0.8mm 0;
+            line-height: 1.4;
         }
 
         .barcode-image {
             width: 100%;
             height: auto;
-            max-height: 9mm;
+            max-height: 12mm;
             object-fit: contain;
             image-rendering: crisp-edges;
-            margin: 0.5mm 0;
+            margin: 1mm 0;
         }
 
         .product-code {
-            font-size: 7pt;
+            font-size: 10pt;
             font-family: 'Courier New', 'Consolas', monospace;
             text-align: center;
             color: #333;
             font-weight: 600;
             letter-spacing: 0.1em;
-            line-height: 1.3;
-            margin-top: 0.3mm;
+            line-height: 1.5;
+            margin-top: 0.8mm;
         }
 
         .controls {
@@ -250,8 +250,6 @@
                 width: 112mm !important;
                 height: auto !important;
                 overflow: visible !important;
-                zoom: 1 !important;
-                transform: scale(1) !important;
             }
 
             .barcode-container {
@@ -266,6 +264,23 @@
                 overflow: visible !important;
                 page-break-after: auto !important;
                 border: none !important;
+                transform: scale(1) !important;
+            }
+
+            .product-name {
+                font-size: 6.5pt !important;
+            }
+
+            .product-price {
+                font-size: 8.5pt !important;
+            }
+
+            .barcode-image {
+                max-height: 9mm !important;
+            }
+
+            .product-code {
+                font-size: 7pt !important;
             }
 
             .barcode-label {
@@ -319,7 +334,7 @@
 </head>
 <body>
     <div class="barcode-container">
-        <div class="measurement-label top-label" style="width: 112mm; text-align: center;">
+        <div class="measurement-label top-label" style="width: 112mm; text-align: center; font-size: 13px; padding: 3px 6px;">
             112mm Total Width (Paper Roll)
         </div>
         
@@ -334,7 +349,7 @@
                 </div>
                 
                 <div class="barcode-spacer left-margin">
-                    <span class="measurement-label" style="top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 6px;">4mm</span>
+                    <span class="measurement-label" style="top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 9px;">4mm</span>
                 </div>
                 
                 @foreach($chunk as $index => $product)
@@ -346,7 +361,7 @@
                     </div>
                     
                     <div class="barcode-spacer">
-                        <span class="measurement-label" style="top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 6px;">3mm</span>
+                        <span class="measurement-label" style="top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 9px;">3mm</span>
                     </div>
                 @endforeach
                 
@@ -357,16 +372,16 @@
                 @for($i = 0; $i < $remaining; $i++)
                     <div style="width: 33mm; height: 21mm; border: 1px dashed #ddd; box-sizing: border-box;"></div>
                     <div class="barcode-spacer">
-                        <span class="measurement-label" style="top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 6px;">3mm</span>
+                        <span class="measurement-label" style="top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 9px;">3mm</span>
                     </div>
                 @endfor
                 
                 <div class="barcode-spacer right-margin">
-                    <span class="measurement-label" style="top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 6px; display: {{ $rowIndex === 0 ? 'block' : 'none' }};">3mm</span>
+                    <span class="measurement-label" style="top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 9px; display: {{ $rowIndex === 0 ? 'block' : 'none' }};">3mm</span>
                 </div>
                 
                 @if($rowIndex < $chunks->count() - 1)
-                    <div style="position: absolute; bottom: -2mm; left: 0; right: 0; text-align: center; font-size: 6px; color: #999; font-family: monospace;">
+                    <div style="position: absolute; bottom: -2mm; left: 0; right: 0; text-align: center; font-size: 9px; color: #999; font-family: monospace; font-weight: 600;">
                         4mm Gap
                     </div>
                 @endif
