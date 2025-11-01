@@ -26,7 +26,7 @@
         .barcode-container {
             display: flex;
             flex-direction: column;
-            width: 107mm;
+            width: 112mm;
             padding: 0;
             margin: 0;
             background: #ffffff;
@@ -64,8 +64,8 @@
 
         .barcode-row {
             display: flex;
-            width: 107mm;
-            margin-bottom: 3mm;
+            width: 112mm;
+            margin-bottom: 4mm;
             page-break-inside: avoid;
             break-inside: avoid;
             position: relative;
@@ -84,11 +84,24 @@
         }
 
         .barcode-spacer:first-child {
+            width: 4mm; /* Left margin: 4mm */
+        }
+
+        .barcode-spacer:last-child {
+            width: 3mm; /* Right margin: 3mm */
+        }
+
+        .barcode-spacer.left-margin {
+            width: 4mm;
             border-left: 2px solid #999;
         }
 
+        .barcode-spacer.right-margin {
+            width: 3mm;
+        }
+
         .barcode-label {
-            width: 31.67mm;
+            width: 33mm;
             height: 21mm;
             border: 1px solid #ccc;
             padding: 1.5mm 2mm;
@@ -106,7 +119,7 @@
         }
 
         .barcode-label::before {
-            content: '31.67mm';
+            content: '33mm';
             position: absolute;
             top: -12px;
             left: 50%;
@@ -239,13 +252,13 @@
                 padding: 0 !important;
                 margin: 0 !important;
                 display: block !important;
-                width: 107mm !important;
+                width: 112mm !important;
                 height: auto !important;
                 overflow: visible !important;
             }
 
             .barcode-container {
-                width: 107mm !important;
+                width: 112mm !important;
                 margin: 0 !important;
                 padding: 0 !important;
                 background: #ffffff !important;
@@ -284,12 +297,12 @@
             }
 
             .barcode-row {
-                margin-bottom: 3mm !important;
+                margin-bottom: 4mm !important;
                 page-break-inside: avoid !important;
                 break-inside: avoid !important;
                 page-break-after: auto !important;
                 display: flex !important;
-                width: 107mm !important;
+                width: 112mm !important;
             }
 
             .barcode-label {
@@ -300,7 +313,7 @@
             }
 
             @page {
-                size: 107mm auto; /* Continuous roll: 10.7cm width, auto height */
+                size: 112mm auto; /* Continuous roll: 11.2cm width, auto height */
                 margin: 0 !important;
                 padding: 0 !important;
             }
@@ -309,8 +322,8 @@
 </head>
 <body>
     <div class="barcode-container">
-        <div class="measurement-label top-label" style="width: 107mm; text-align: center;">
-            107mm Total Width (Paper Roll)
+        <div class="measurement-label top-label" style="width: 112mm; text-align: center;">
+            112mm Total Width (Paper Roll)
         </div>
         
         @php
@@ -320,11 +333,11 @@
         @foreach($chunks as $rowIndex => $chunk)
             <div class="barcode-row">
                 <div class="measurement-label left-label" style="display: {{ $rowIndex === 0 ? 'block' : 'none' }};">
-                    3mm Margin
+                    4mm Margin
                 </div>
                 
-                <div class="barcode-spacer">
-                    <span class="measurement-label" style="top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 6px;">3mm</span>
+                <div class="barcode-spacer left-margin">
+                    <span class="measurement-label" style="top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 6px;">4mm</span>
                 </div>
                 
                 @foreach($chunk as $index => $product)
@@ -345,15 +358,19 @@
                 @endphp
                 
                 @for($i = 0; $i < $remaining; $i++)
-                    <div style="width: 31.67mm; height: 21mm; border: 1px dashed #ddd; box-sizing: border-box;"></div>
+                    <div style="width: 33mm; height: 21mm; border: 1px dashed #ddd; box-sizing: border-box;"></div>
                     <div class="barcode-spacer">
                         <span class="measurement-label" style="top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 6px;">3mm</span>
                     </div>
                 @endfor
                 
+                <div class="barcode-spacer right-margin">
+                    <span class="measurement-label" style="top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 6px; display: {{ $rowIndex === 0 ? 'block' : 'none' }};">3mm</span>
+                </div>
+                
                 @if($rowIndex < $chunks->count() - 1)
-                    <div style="position: absolute; bottom: -1.5mm; left: 0; right: 0; text-align: center; font-size: 6px; color: #999; font-family: monospace;">
-                        3mm Gap
+                    <div style="position: absolute; bottom: -2mm; left: 0; right: 0; text-align: center; font-size: 6px; color: #999; font-family: monospace;">
+                        4mm Gap
                     </div>
                 @endif
             </div>
@@ -363,7 +380,7 @@
     <div class="controls">
         <div style="background: #fff; padding: 12px 16px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.15); margin-right: 12px; font-size: 12px; color: #666; max-width: 220px;">
             <strong>⚠️ Print All Labels:</strong><br>
-            • <strong>Paper Size:</strong> Custom 107mm<br>
+            • <strong>Paper Size:</strong> Custom 112mm<br>
             • <strong>More Settings:</strong> Uncheck "Simplify page"<br>
             • <strong>Scale:</strong> 100% (NOT "Fit to page")<br>
             • <strong>Margins:</strong> None<br>
