@@ -20,7 +20,7 @@
             justify-content: center;
             align-items: flex-start;
             min-height: 100vh;
-            padding-top: 20px;
+            padding: 30px 50px;
         }
 
         .barcode-container {
@@ -33,26 +33,65 @@
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
             height: auto;
             min-height: auto;
+            position: relative;
+            border-left: 1px dashed #ccc;
+            border-right: 1px dashed #ccc;
+        }
+
+        .measurement-label {
+            position: absolute;
+            font-size: 8px;
+            color: #999;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 1px 3px;
+            border-radius: 2px;
+            font-family: monospace;
+            z-index: 10;
+            pointer-events: none;
+        }
+
+        .top-label {
+            top: -15px;
+            left: 0;
+        }
+
+        .left-label {
+            left: -30px;
+            top: 50%;
+            transform: translateY(-50%) rotate(-90deg);
+            transform-origin: center;
         }
 
         .barcode-row {
             display: flex;
             width: 107mm;
-            margin-bottom: 3mm; /* Space between rows */
+            margin-bottom: 3mm;
             page-break-inside: avoid;
             break-inside: avoid;
+            position: relative;
+            border-top: 1px dashed #ddd;
+        }
+
+        .barcode-row:first-child {
+            border-top: 2px solid #999;
         }
 
         .barcode-spacer {
             width: 2mm;
             flex-shrink: 0;
+            position: relative;
+            border-left: 1px dashed #e0e0e0;
+        }
+
+        .barcode-spacer:first-child {
+            border-left: 2px solid #999;
         }
 
         .barcode-label {
-            width: 33mm; /* 3.3cm */
-            height: 21mm; /* 2.1cm */
-            border: none;
-            padding: 1.5mm 2mm; /* Vertical padding slightly less, horizontal more */
+            width: 33mm;
+            height: 21mm;
+            border: 1px solid #ccc;
+            padding: 1.5mm 2mm;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -62,6 +101,36 @@
             background: #ffffff;
             flex-shrink: 0;
             position: relative;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        .barcode-label::before {
+            content: '33mm';
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 7px;
+            color: #666;
+            background: #fff;
+            padding: 0 2px;
+            font-family: monospace;
+            white-space: nowrap;
+        }
+
+        .barcode-label::after {
+            content: '21mm';
+            position: absolute;
+            left: -20px;
+            top: 50%;
+            transform: translateY(-50%) rotate(-90deg);
+            font-size: 7px;
+            color: #666;
+            background: #fff;
+            padding: 0 2px;
+            font-family: monospace;
+            white-space: nowrap;
         }
 
         .product-name {
@@ -183,6 +252,28 @@
                 max-height: none !important;
                 overflow: visible !important;
                 page-break-after: auto !important;
+                border: none !important;
+            }
+
+            .barcode-label {
+                border: none !important;
+            }
+
+            .barcode-label::before,
+            .barcode-label::after {
+                display: none !important;
+            }
+
+            .barcode-row {
+                border-top: none !important;
+            }
+
+            .barcode-spacer {
+                border-left: none !important;
+            }
+
+            .measurement-label {
+                display: none !important;
             }
 
             .controls {
@@ -215,13 +306,23 @@
 </head>
 <body>
     <div class="barcode-container">
+        <div class="measurement-label top-label" style="width: 107mm; text-align: center;">
+            107mm Total Width (Paper Roll)
+        </div>
+        
         @php
             $chunks = $products->chunk(3); // 3 barcodes per row
         @endphp
 
-        @foreach($chunks as $chunk)
+        @foreach($chunks as $rowIndex => $chunk)
             <div class="barcode-row">
-                <div class="barcode-spacer"></div> <!-- Left 2mm space -->
+                <div class="measurement-label left-label" style="display: {{ $rowIndex === 0 ? 'block' : 'none' }};">
+                    2mm Margin
+                </div>
+                
+                <div class="barcode-spacer">
+                    <span class="measurement-label" style="top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 6px;">2mm</span>
+                </div>
                 
                 @foreach($chunk as $index => $product)
                     <div class="barcode-label">
@@ -231,18 +332,27 @@
                         <div class="product-code">{{ $product->code }}</div>
                     </div>
                     
-                    <div class="barcode-spacer"></div> <!-- 2mm space after each barcode -->
+                    <div class="barcode-spacer">
+                        <span class="measurement-label" style="top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 6px;">2mm</span>
+                    </div>
                 @endforeach
                 
                 @php
-                    // Fill remaining slots if less than 3 barcodes in row
                     $remaining = 3 - $chunk->count();
                 @endphp
                 
                 @for($i = 0; $i < $remaining; $i++)
-                    <div style="width: 33mm; height: 21mm;"></div> <!-- Empty placeholder -->
-                    <div class="barcode-spacer"></div>
+                    <div style="width: 33mm; height: 21mm; border: 1px dashed #ddd; box-sizing: border-box;"></div>
+                    <div class="barcode-spacer">
+                        <span class="measurement-label" style="top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 6px;">2mm</span>
+                    </div>
                 @endfor
+                
+                @if($rowIndex < $chunks->count() - 1)
+                    <div style="position: absolute; bottom: -1.5mm; left: 0; right: 0; text-align: center; font-size: 6px; color: #999; font-family: monospace;">
+                        3mm Gap
+                    </div>
+                @endif
             </div>
         @endforeach
     </div>
