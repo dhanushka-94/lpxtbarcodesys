@@ -143,10 +143,13 @@
             display: -webkit-box;
             -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
-            line-height: 1.15;
+            line-height: 1.25;
             word-wrap: break-word;
             letter-spacing: 0.01em;
             margin-bottom: 0.5mm;
+            min-height: 5mm;
+            padding: 0.2mm 0;
+            box-sizing: border-box;
         }
 
         .product-price {
