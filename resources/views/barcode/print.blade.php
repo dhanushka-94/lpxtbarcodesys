@@ -83,14 +83,6 @@
             border-left: 1px dashed #e0e0e0;
         }
 
-        .barcode-spacer:first-child {
-            width: 4mm; /* Left margin: 4mm */
-        }
-
-        .barcode-spacer:last-child {
-            width: 3mm; /* Right margin: 3mm */
-        }
-
         .barcode-spacer.left-margin {
             width: 4mm;
             border-left: 2px solid #999;
@@ -114,7 +106,7 @@
             background: #ffffff;
             flex-shrink: 0;
             position: relative;
-            margin: 0;
+            margin: 1mm;
             box-sizing: border-box;
         }
 
