@@ -135,7 +135,7 @@
 
         .product-name {
             font-size: 6.5pt;
-            font-weight: 700;
+            font-weight: 400;
             text-align: center;
             color: #1a1a1a;
             width: 100%;
